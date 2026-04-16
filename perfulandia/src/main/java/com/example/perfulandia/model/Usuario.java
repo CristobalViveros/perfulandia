@@ -15,4 +15,5 @@ import lombok.NoArgsConstructor;
 @Table
 public class Usuario {
     private int id;
+    private String nombre;
 }
