@@ -2,8 +2,11 @@ package com.example.perfulandia.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import javax.annotation.processing.Generated;
-import lombok; 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
 
 @Data
 @NoArgsConstructor
@@ -12,7 +15,7 @@ import lombok;
 @Table (name = "sucursales") 
 
 public class Sucursal {
-    @id
+    @Id
     @GeneratedValues(Strategy = GenerationType.IDENTITY)
     private Long id;
 
