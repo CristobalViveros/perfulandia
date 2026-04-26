@@ -1,5 +1,5 @@
 package com.example.perfulandia.repository;
 
-public interface EmpleadoRepository {
+public interface PedidoDetalleRepository {
 
 }

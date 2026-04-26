@@ -14,6 +14,18 @@ import lombok.NoArgsConstructor;
 @Valid
 @Table
 public class Usuario {
-    private int id;
+    private Integer id;
     private String nombre;
+    public Object getEmail() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getEmail'");
+    }
+    public void setEmail(Object email) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setEmail'");
+    }
+    public void setActivo(boolean b) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setActivo'");
+    }
 }
