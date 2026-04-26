@@ -3,10 +3,11 @@ package com.example.perfulandia.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-import javax.annotation.processing.Generated;
 
-import lombok; 
+import lombok.*; 
 
 @Data
 @NoArgsConstructor
@@ -16,7 +17,7 @@ import lombok;
 
 public class Permiso {
 
-    @id
+    @Id
     @GeneratedValues(Strategy = GenerationType.IDENTITY)
     private Long id;
 
