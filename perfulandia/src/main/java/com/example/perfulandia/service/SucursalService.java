@@ -7,5 +7,6 @@ import com.example.perfulandia.model.Sucursal;
 public interface SucursalService {
 
     List<Sucursal> listar();
+    
 
 }
