@@ -1,5 +1,5 @@
 package com.example.perfulandia.repository;
-import com.example.perfulandia.model.Rol;
+import com.example.perfulandia.model.Permiso;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
