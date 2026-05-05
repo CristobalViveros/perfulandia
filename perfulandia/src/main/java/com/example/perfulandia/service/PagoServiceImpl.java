@@ -17,9 +17,15 @@ public class PagoServiceImpl implements PagoService {
         this.repo = repo;
     }
 
+    @Override
     public Pago crear(Pago p) {
         p.setId(null);
         return repo.save(p);
     }
 
+    @Override
+    public Pago obtenerPorPedido(Long pedidoId) {
+        return repo.findByPedidoId(pedidoId)
+                .orElseThrow(() -> new RuntimeException("Pago no encontrado para el pedido"));
+    }
 }

@@ -2,7 +2,7 @@ package com.example.perfulandia.controller;
 
 import java.util.List;
 
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,10 +21,7 @@ public class SucursalController {
     }
 
     @GetMapping
-    public List<Sucursal> listar() {
-        return service.listar();
+    public ResponseEntity<List<Sucursal>> listar() {
+        return ResponseEntity.ok(service.listar());
     }
-
-    
-
 }

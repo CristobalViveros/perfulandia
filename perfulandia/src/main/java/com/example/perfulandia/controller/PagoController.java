@@ -1,5 +1,6 @@
 package com.example.perfulandia.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.perfulandia.model.Pago;
 import com.example.perfulandia.service.PagoService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/pagos")
@@ -26,8 +29,8 @@ public class PagoController {
     }
 
     @PostMapping
-    public Pago crear(@RequestBody Pago pago) {
-        return service.crear(pago);
+    public ResponseEntity<Pago> crear(@Valid @RequestBody Pago pago) {
+        Pago creado = service.crear(pago);
+        return ResponseEntity.status(201).body(creado);
     }
-
 }

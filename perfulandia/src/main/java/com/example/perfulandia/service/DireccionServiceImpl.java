@@ -19,13 +19,19 @@ public class DireccionServiceImpl implements DireccionService {
         this.repo = repo;
     }
 
+    @Override
     public Direccion crear(Direccion d) {
         d.setId(null);
         return repo.save(d);
     }
 
+    @Override
     public List<Direccion> listarPorCliente(Long clienteId) {
         return repo.findByClienteId(clienteId);
     }
 
+    @Override
+    public void eliminar(Long id) {
+        repo.deleteById(id);
+    }
 }

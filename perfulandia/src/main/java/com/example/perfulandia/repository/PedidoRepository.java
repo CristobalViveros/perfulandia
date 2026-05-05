@@ -8,7 +8,7 @@ import com.example.perfulandia.model.Pedido;
 
 public interface PedidoRepository  extends JpaRepository<Pedido,Long> {
     
-        List<Pedido> finByClienteld(Long
+        List<Pedido> findByClienteId(Long
             clienteld);
         
     
