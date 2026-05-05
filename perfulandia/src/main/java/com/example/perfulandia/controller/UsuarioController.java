@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.perfulandia.model.Usuario;
 import com.example.perfulandia.service.UsuarioService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
@@ -37,18 +39,24 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public Usuario crear(@RequestBody Usuario usuario) {
-        return service.crear(usuario);
+    public ResponseEntity<Usuario> crear(@Valid @RequestBody Usuario usuario) {
+        Usuario creado = service.crear(usuario);
+        return ResponseEntity.status(201).body(creado);
     }
 
     @PutMapping("/{id}")
-    public Usuario actualizar(@PathVariable Long id, @RequestBody Usuario cambios) {
-        return service.actualizar(id, cambios);
+    public ResponseEntity<Usuario> actualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody Usuario cambios) {
+
+        Usuario actualizado = service.actualizar(id, cambios);
+        return ResponseEntity.ok(actualizado);
     }
 
     @PatchMapping("/{id}/desactivar")
-    public Usuario desactivar(@PathVariable Long id) {
-        return service.desactivar(id);
+    public ResponseEntity<Usuario> desactivar(@PathVariable Long id) {
+        Usuario actualizado = service.desactivar(id);
+        return ResponseEntity.ok(actualizado);
     }
 
     @DeleteMapping("/{id}")
@@ -56,5 +64,4 @@ public class UsuarioController {
         service.desactivar(id);
         return ResponseEntity.noContent().build();
     }
-
 }

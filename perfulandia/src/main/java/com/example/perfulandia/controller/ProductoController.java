@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.perfulandia.model.Producto;
 import com.example.perfulandia.service.ProductoService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/productos")
 public class ProductoController {
@@ -36,13 +38,18 @@ public class ProductoController {
     }
 
     @PostMapping
-    public Producto crear(@RequestBody Producto producto) {
-        return service.crear(producto);
+    public ResponseEntity<Producto> crear(@Valid @RequestBody Producto producto) {
+        Producto creado = service.crear(producto);
+        return ResponseEntity.status(201).body(creado);
     }
 
     @PutMapping("/{id}")
-    public Producto actualizar(@PathVariable Long id, @RequestBody Producto cambios) {
-        return service.actualizar(id, cambios);
+    public ResponseEntity<Producto> actualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody Producto cambios) {
+
+        Producto actualizado = service.actualizar(id, cambios);
+        return ResponseEntity.ok(actualizado);
     }
 
     @DeleteMapping("/{id}")
@@ -50,5 +57,4 @@ public class ProductoController {
         service.eliminar(id);
         return ResponseEntity.noContent().build();
     }
-
 }

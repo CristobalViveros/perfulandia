@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.perfulandia.model.Direccion;
 import com.example.perfulandia.service.DireccionService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/direcciones")
 public class DireccionController {
@@ -30,8 +32,11 @@ public class DireccionController {
     }
 
     @PostMapping
-    public Direccion crear(@RequestBody Direccion direccion) {
-        return service.crear(direccion);
+    public ResponseEntity<Direccion> crear(
+            @Valid @RequestBody Direccion direccion) {
+
+        Direccion creada = service.crear(direccion);
+        return ResponseEntity.status(201).body(creada);
     }
 
     @DeleteMapping("/{id}")
@@ -39,5 +44,4 @@ public class DireccionController {
         service.eliminar(id);
         return ResponseEntity.noContent().build();
     }
-
 }

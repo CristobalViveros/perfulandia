@@ -2,6 +2,7 @@ package com.example.perfulandia.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.perfulandia.model.OrdenCompra;
 import com.example.perfulandia.service.OrdenCompraService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/ordenes-compra")
@@ -35,13 +38,17 @@ public class OrdenCompraController {
     }
 
     @PostMapping
-    public OrdenCompra crear(@RequestBody OrdenCompra oc) {
-        return service.crear(oc);
+    public ResponseEntity<OrdenCompra> crear(@Valid @RequestBody OrdenCompra oc) {
+        OrdenCompra creada = service.crear(oc);
+        return ResponseEntity.status(201).body(creada);
     }
 
     @PatchMapping("/{id}/estado")
-    public OrdenCompra cambiarEstado(@PathVariable Long id, @RequestParam OrdenCompra.EstadoOC estado) {
-        return service.cambiarEstado(id, estado);
-    }
+    public ResponseEntity<OrdenCompra> cambiarEstado(
+            @PathVariable Long id,
+            @RequestParam OrdenCompra.EstadoOC estado) {
 
+        OrdenCompra actualizada = service.cambiarEstado(id, estado);
+        return ResponseEntity.ok(actualizada);
+    }
 }

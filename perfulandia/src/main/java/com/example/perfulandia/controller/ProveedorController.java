@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.perfulandia.model.Proveedor;
 import com.example.perfulandia.service.ProveedorService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/proveedores")
 public class ProveedorController {
@@ -30,8 +32,9 @@ public class ProveedorController {
     }
 
     @PostMapping
-    public Proveedor crear(@RequestBody Proveedor proveedor) {
-        return service.crear(proveedor);
+    public ResponseEntity<Proveedor> crear(@Valid @RequestBody Proveedor proveedor) {
+        Proveedor creado = service.crear(proveedor);
+        return ResponseEntity.status(201).body(creado);
     }
 
     @DeleteMapping("/{id}")
@@ -39,5 +42,4 @@ public class ProveedorController {
         service.eliminar(id);
         return ResponseEntity.noContent().build();
     }
-
 }

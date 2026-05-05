@@ -1,5 +1,6 @@
 package com.example.perfulandia.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.perfulandia.model.Envio;
 import com.example.perfulandia.service.EnvioService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/envios")
@@ -33,13 +36,17 @@ public class EnvioController {
     }
 
     @PostMapping
-    public Envio crear(@RequestBody Envio envio) {
-        return service.crear(envio);
+    public ResponseEntity<Envio> crear(@Valid @RequestBody Envio envio) {
+        Envio creado = service.crear(envio);
+        return ResponseEntity.status(201).body(creado);
     }
 
     @PatchMapping("/{id}/estado")
-    public Envio cambiarEstado(@PathVariable Long id, @RequestParam Envio.EstadoEnvio estado) {
-        return service.cambiarEstado(id, estado);
-    }
+    public ResponseEntity<Envio> cambiarEstado(
+            @PathVariable Long id,
+            @RequestParam Envio.EstadoEnvio estado) {
 
+        Envio actualizado = service.cambiarEstado(id, estado);
+        return ResponseEntity.ok(actualizado);
+    }
 }

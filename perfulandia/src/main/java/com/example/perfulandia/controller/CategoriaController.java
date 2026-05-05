@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.perfulandia.model.Categoria;
 import com.example.perfulandia.service.CategoriaService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/categorias")
 public class CategoriaController {
@@ -25,13 +27,16 @@ public class CategoriaController {
     }
 
     @GetMapping
-    public List<Categoria> listar() {
-        return service.listar();
+    public ResponseEntity<List<Categoria>> listar() {
+        return ResponseEntity.ok(service.listar());
     }
 
     @PostMapping
-    public Categoria crear(@RequestBody Categoria categoria) {
-        return service.crear(categoria);
+    public ResponseEntity<Categoria> crear(
+            @Valid @RequestBody Categoria categoria) {
+
+        Categoria creada = service.crear(categoria);
+        return ResponseEntity.status(201).body(creada);
     }
 
     @DeleteMapping("/{id}")
@@ -39,5 +44,4 @@ public class CategoriaController {
         service.eliminar(id);
         return ResponseEntity.noContent().build();
     }
-
 }

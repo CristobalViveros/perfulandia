@@ -11,21 +11,27 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class CategoriaServiceImpl implements CategoriaService{
-    
+public class CategoriaServiceImpl implements CategoriaService {
+
     private final CategoriaRepository repo;
 
     public CategoriaServiceImpl(CategoriaRepository repo) {
         this.repo = repo;
     }
 
+    @Override
     public List<Categoria> listar() {
         return repo.findAll();
     }
 
+    @Override
     public Categoria crear(Categoria c) {
         c.setId(null);
         return repo.save(c);
     }
 
+    @Override
+    public void eliminar(Long id) {
+        repo.deleteById(id);
+    }
 }

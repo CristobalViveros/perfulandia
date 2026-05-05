@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.perfulandia.model.Cliente;
 import com.example.perfulandia.service.ClienteService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/clientes")
 public class ClienteController {
@@ -26,7 +28,7 @@ public class ClienteController {
     }
 
     @GetMapping
-    public List<Cliente> listar(String nombre) {
+    public List<Cliente> listar() {
         return service.listar();
     }
 
@@ -36,13 +38,20 @@ public class ClienteController {
     }
 
     @PostMapping
-    public Cliente crear(@RequestBody Cliente cliente) {
-        return service.crear(cliente);
+    public ResponseEntity<Cliente> crear(
+            @Valid @RequestBody Cliente cliente) {
+
+        Cliente creado = service.crear(cliente);
+        return ResponseEntity.status(201).body(creado);
     }
 
     @PutMapping("/{id}")
-    public Cliente actualizar(@PathVariable Long id, @RequestBody Cliente cambios) {
-        return service.actualizar(id, cambios);
+    public ResponseEntity<Cliente> actualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody Cliente cambios) {
+
+        Cliente actualizado = service.actualizar(id, cambios);
+        return ResponseEntity.ok(actualizado);
     }
 
     @DeleteMapping("/{id}")
@@ -50,5 +59,4 @@ public class ClienteController {
         service.eliminar(id);
         return ResponseEntity.noContent().build();
     }
-
 }
